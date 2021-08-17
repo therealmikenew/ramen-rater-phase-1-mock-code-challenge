@@ -46,7 +46,7 @@ As a user, I can:
 - Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the `index.html` file to create the edit form:
 
 ```html
-  <form id="new-ramen">
+  <form id="edit-ramen">
     <h4>Update the Featured Ramen</h4>
     <label for="rating">Rating: </label>
     <input type="number" name="rating" id="new-rating" />
