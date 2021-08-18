@@ -1,5 +1,9 @@
 # Ramen Rater
 
+Lovingly stolen and modified from [*Ian Hollander*](https://github.com/ihollander/phase-3-mock-code-challenge-ramen-rater).
+
+##
+
 Today you'll be building an app for rating ramen. You will be using a local API and building out the frontend for our app.
 
 ## Demo
