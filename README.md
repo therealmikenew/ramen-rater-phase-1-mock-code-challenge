@@ -6,7 +6,7 @@ Today you'll be building an app for rating ramen. You will be using a local API 
 
 Use this gif as an example of how the app should work.
 
-![demo](assets/demo.gif)
+![demo](assets/demo-gif.gif)
 
 ## Setup
 
