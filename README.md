@@ -18,7 +18,7 @@ Use this gif as an example of how the app should work.
 
 Your base URL for your API will be: http://localhost:3000
 
-The endpoints you will need are:
+The endpoints you may need are:
 
 - GET `/ramens`
 - GET `/ramens/:id`
