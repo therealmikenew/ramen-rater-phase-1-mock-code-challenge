@@ -1,58 +1,74 @@
-// write your code here
-fetch(' http://localhost:3000/ramens')
-    .then(r => r.json())
-    .then(arr => {
-        arr.forEach(ramen => {
-            renderNewRamen(ramen)
-        });
-    })
 
+// - See all ramen images in the `div` with the id of `ramen-menu`. When the page loads, request the data from the server to get all the ramen objects. Then, display the image for each of the ramen using an an `img` tag inside the `#ramen-menu` div.
+const ramenMenu = document.querySelector('#ramen-menu');
 
-function renderNewRamen(ramen) {
-    const img = document.createElement('img')
-    img.src = ramen.image
-    document.querySelector('#ramen-menu').append(img)
+fetch('http://localhost:3000/ramens')
+.then(resp => resp.json())
+.then(ramenData => ramenData.forEach(ramen => renderRamen(ramen)))
 
-    img.addEventListener('click', e => {
-        const ramenDetail = document.querySelector("#ramen-detail")
-        const detailImg = ramenDetail.querySelector('.detail-image')
-        detailImg.src = ramen.image
+function renderRamen(ramen){
+    //for each object from ramenData, grabs div element, creates and img tag, updates URL (src) and then appends ramenImg to ramenMenu
+    
+    const ramenImg = document.createElement('img')
 
-        const h2 = ramenDetail.querySelector('h2.name')
-        h2.textContent = ramen.name
+    ramenImg.src = ramen.image;
+    ramenMenu.append(ramenImg);
 
-        const h3 = ramenDetail.querySelector('h3.restaurant')
-        h3.textContent = ramen.restaurant
+    // - Click on an image from the `#ramen-menu` div and see all the info about that ramen displayed inside the `#ramen-detail` div, as well as the current rating and comment for the ramen displayed in the `#ramen-rating` form.
 
-        const rating = document.querySelector("body > p:nth-child(5) > span")
-        rating.textContent = ramen.rating
+    ramenImg.addEventListener('click', () => {
+        const detailImg = document.querySelector('.detail-image');
+        const name = document.querySelector('.name')
+        const restaurant = document.querySelector('.restaurant');
+    
+        detailImg.src = ramen.image;
+        name.textContent = ramen.name;
+        restaurant.textContent = ramen.restaurant;
+    
+        const rating = document.querySelector('span')
+        rating.textContent = ramen.rating;
 
-        const comment = document.querySelector("body > p:nth-child(7)")
-        comment.textContent = ramen.comment
-    })
+        const comment = document.querySelectorAll('p');
+        comment[1].textContent = ramen.comment;
+    })    
 }
-// document.querySelector('#ramen-menu').addEventListener('click', e => {
-//     if(e.target.matches('')) {
 
-//     }
-// })
+// - Create a new ramen after submiting the `new-ramen` form. The new ramen should be added to the`#ramen-menu` div.  The new ramen does not need to persist; in other words, if you refresh the page, it's okay that the new ramen is no longer on the page.
+    
+const newRamen = document.querySelector('input[type=submit]');
 
-
-
-
-const form = document.querySelector("#new-ramen")
-form.addEventListener('submit', e => {
+newRamen.addEventListener('click', (e) => {
     e.preventDefault()
-    const name = e.target[0].value
-    const restaurant = e.target[1].value
-    const image = e.target[2].value
-    const rating = e.target[3].value
-    const comment = e.target[4].value
+    const newName = document.querySelector('#new-name');
+    const newRest = document.querySelector('#new-restaurant');
+    const newImg = document.querySelector('#new-image');
+    const newRating = document.querySelector('#new-rating');
+    const newComment = document.querySelector('#new-comment');
 
-    const ramen = { name, restaurant, image, rating, comment }
-    console.log(ramen)
-    renderNewRamen(ramen)
-    e.target.reset()
+    const addImg = document.createElement('img');
+    addImg.src = newImg.value
+
+    ramenMenu.append(addImg);
+
+
+    ramenMenu.addEventListener('click', () => {
+        const detailImg = document.querySelector('.detail-image');
+        const name = document.querySelector('.name')
+        const restaurant = document.querySelector('.restaurant');
+    
+        detailImg.src = newImg.value;
+        name.textContent = newName.value;
+        restaurant.textContent = newRest.value;
+    
+        const rating = document.querySelector('span')
+        rating.textContent = newRating.value
+
+        const comment = document.querySelectorAll('p');
+        //document.querySelector("body > p:nth-child(7)")
+        comment[1].textContent = newComment.value;
+    })
 })
+
+
 
 
